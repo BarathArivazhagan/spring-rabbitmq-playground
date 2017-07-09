@@ -1,8 +1,0 @@
- {
- 	"customerId": 1000,
- 	"customerName": "barath",
- 	"customerGender": "MALE",
- 	"accounts": [{
- 		"accountNumber": 1000000000
- 	}]
- }

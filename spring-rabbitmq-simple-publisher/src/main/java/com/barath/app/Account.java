@@ -1,5 +1,6 @@
 package com.barath.app;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import com.barath.app.Customer.CustomerGender;
@@ -17,7 +18,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Account {
+public class Account implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 773784271152664523L;
+	
 	
 	private Long accountNumber;
 	

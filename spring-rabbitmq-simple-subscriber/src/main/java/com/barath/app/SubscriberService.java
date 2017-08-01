@@ -17,8 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 public class SubscriberService {
 	
 	private static final ObjectMapper mapper=new ObjectMapper();
-	
-	//@RabbitListener(queues="${queue.name}")
+	/*
+	@RabbitListener(queues="${queue.name}")
 	public void receiveMessage(Message message){
 		
 		System.out.println("Listener is called ");
@@ -45,7 +45,7 @@ public class SubscriberService {
 		
 		}
 	}
-	
+	*/
 	
 		@RabbitListener(queues="${queue.name}")
 		public void receiveCustomer(Customer customer){

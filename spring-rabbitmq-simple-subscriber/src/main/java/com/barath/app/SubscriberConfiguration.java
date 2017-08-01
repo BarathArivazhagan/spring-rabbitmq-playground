@@ -9,6 +9,7 @@ import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFacto
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -69,6 +70,7 @@ public class SubscriberConfiguration {
 	        factory.setConnectionFactory(connectionFactory());
 	        factory.setConcurrentConsumers(3);
 	        factory.setMaxConcurrentConsumers(10);
+	        factory.setMessageConverter(new Jackson2JsonMessageConverter());
 	        return factory;
 	    }
 

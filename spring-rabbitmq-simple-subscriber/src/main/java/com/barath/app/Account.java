@@ -1,5 +1,7 @@
 package com.barath.app;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -17,9 +19,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Account {
+public class Account  implements Serializable {
 	
-	@JsonIgnore
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 773784271152664523L;
+	
+	
+	
 	private Long accountNumber;
 	
 	

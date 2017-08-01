@@ -3,6 +3,7 @@ package com.barath.app;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,7 @@ public class PublisherService {
 		
 		try {
 			String customerJson=mapper.writeValueAsString(customer);
-			System.out.println("Customer "+customerJson);
-			Message message=MessageBuilder.withBody(customerJson.getBytes()).build();
+			System.out.println("Customer "+customerJson);				
 			rabbitTemplate.convertAndSend(queueName,customer);
 		} catch (JsonProcessingException e) {
 			

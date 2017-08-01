@@ -1,5 +1,6 @@
 package com.barath.app;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +17,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Customer {
+public class Customer  implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2689174839009620081L;
 	
 	private Long customerId;
 	

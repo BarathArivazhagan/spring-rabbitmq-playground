@@ -17,35 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SubscriberService {
 	
 	private static final ObjectMapper mapper=new ObjectMapper();
-	/*
-	@RabbitListener(queues="${queue.name}")
-	public void receiveMessage(Message message){
-		
-		System.out.println("Listener is called ");
-		if( message !=null){
-		Customer customer=null;
-		try {
-			if(log.isInfoEnabled()){
-				log.info("Message received {}",message);
-			}
-			customer = mapper.readValue(message.getBody(),Customer.class);
-			if(log.isInfoEnabled()){
-				log.info("Customer cust {}",customer.toString());
-			}
-		} catch (JsonParseException e) {
-			log.error("Error during Jackson conversion ",e);
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			log.error("Error during Jackson conversion ",e);
-			e.printStackTrace();
-		} catch (IOException e) {
-			log.error("Error during Jackson conversion ",e);
-			e.printStackTrace();
-		}
-		
-		}
-	}
-	*/
+
 	
 		@RabbitListener(queues="${queue.name}")
 		public void receiveCustomer(Customer customer){
@@ -54,6 +26,12 @@ public class SubscriberService {
 			if( customer !=null){
 				System.out.println("CUSTOMER RECEIVED "+customer.toString());
 			}
+		}
+
+		@RabbitListener(queues="${sync.queue.name}")
+	    public Message receiveAndSendMessage(Message message){
+			System.out.println("Message received "+message.getBody());
+			return message;
 		}
 
 }

@@ -27,7 +27,7 @@ public class PublisherApplicationTests {
 		Set<Account> accounts=new HashSet<Account>();
 		accounts.add(new Account(1000000000L));
 		Customer customer=new Customer(1000L, "barath", CustomerGender.MALE, accounts);
-		publisher.publishMessage(customer);
+		publisher.publishCustomerMessage(customer);
 		
 	}
 

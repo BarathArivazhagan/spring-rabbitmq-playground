@@ -26,9 +26,12 @@ public class PublisherService {
 	
 	@Value("${queue.name}")
 	private String queueName;
+
+	@Value("${sync.queue.name}")
+	private  String syncQueueName;
 	
 	
-	public void publishMessage(Customer customer){
+	public void publishCustomerMessage(Customer customer){
 		
 		try {
 			String customerJson=mapper.writeValueAsString(customer);
@@ -39,6 +42,14 @@ public class PublisherService {
 			e.printStackTrace();
 		}
 		
+	}
+
+	public String publishAndReceiveMessage(String message){
+		System.out.println("publishing and receving the message "+message);
+		Message reponseMessage=rabbitTemplate.sendAndReceive(syncQueueName,MessageBuilder.withBody(message.getBytes()).build());
+		System.out.println("Response message from Rabbit "+reponseMessage.getBody());
+		return new String(reponseMessage.getBody());
+
 	}
 
 }

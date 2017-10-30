@@ -28,6 +28,9 @@ public class PublisherConfiguration {
 	
 	@Value("${spring.rabbitmq.port:5672}")
 	private int rabbitMQPort;
+
+	@Value("${sync.queue.name}")
+	private  String syncQueueName;
 	
 	
 	@Bean
@@ -43,18 +46,31 @@ public class PublisherConfiguration {
 	public Queue queue(){
 		return new Queue(queueName);
 	}
+
+	@Bean
+	public Queue syncQueue(){
+		return new Queue(syncQueueName);
+	}
 	
 	@Bean
 	public TopicExchange topicExchange(){
 		TopicExchange topicExchange=new TopicExchange(exchangeName);
 		return topicExchange;
 	}
+
 	
 	
 	@Bean
     public Binding binding(Queue queue, TopicExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(queueName);
     }
+
+
+
+	@Bean
+	public Binding syncBinding(Queue queue, TopicExchange exchange) {
+		return BindingBuilder.bind(queue).to(exchange).with(syncQueueName);
+	}
 	
 	@Bean
 	public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory){

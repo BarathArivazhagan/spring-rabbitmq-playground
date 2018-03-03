@@ -38,7 +38,6 @@ public class PublisherConfiguration {
 		CachingConnectionFactory factory=new CachingConnectionFactory();
 		factory.setHost(rabbitMQHost);
 		factory.setPort(rabbitMQPort);
-			
 		return factory;
 	}
 	

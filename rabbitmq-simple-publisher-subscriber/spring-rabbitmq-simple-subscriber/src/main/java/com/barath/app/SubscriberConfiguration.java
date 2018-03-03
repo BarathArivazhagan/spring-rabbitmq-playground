@@ -21,16 +21,24 @@ public class SubscriberConfiguration {
 	
 	@Value("${queue.name}")
 	private String queueName;
+
+	@Value("${sync.queue.name}")
+	private  String syncQueueName;
 	
 	@Value("${exchange.name}")
 	private String exchangeName;
 	
 	@Value("${spring.rabbitmq.host:localhost}")
 	private String rabbitMQHost;
-	
-	
+
 	@Value("${spring.rabbitmq.port:5672}")
 	private int rabbitMQPort;
+
+	@Value("${spring.rabbitmq.username:guest}")
+	private String rabbitUserName;
+
+	@Value("${spring.rabbitmq.password:guest}")
+	private String rabbitPassword;
 	
 	
 	@Bean
@@ -38,12 +46,19 @@ public class SubscriberConfiguration {
 		CachingConnectionFactory factory=new CachingConnectionFactory();
 		factory.setHost(rabbitMQHost);
 		factory.setPort(rabbitMQPort);
+		factory.setUsername(rabbitUserName);
+		factory.setPassword(rabbitPassword);
 		return factory;
 	}
 	
 	@Bean
 	public Queue queue(){
 		return new Queue(queueName);
+	}
+
+	@Bean
+	public Queue syncQueue(){
+		return new Queue(syncQueueName);
 	}
 	
 	@Bean

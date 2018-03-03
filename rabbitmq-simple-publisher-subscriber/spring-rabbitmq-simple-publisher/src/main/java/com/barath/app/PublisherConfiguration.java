@@ -18,6 +18,9 @@ public class PublisherConfiguration {
 	
 	@Value("${queue.name}")
 	private String queueName;
+
+	@Value("${sync.queue.name}")
+	private  String syncQueueName;
 	
 	@Value("${exchange.name}")
 	private String exchangeName;
@@ -29,8 +32,12 @@ public class PublisherConfiguration {
 	@Value("${spring.rabbitmq.port:5672}")
 	private int rabbitMQPort;
 
-	@Value("${sync.queue.name}")
-	private  String syncQueueName;
+
+	@Value("${spring.rabbitmq.username:guest}")
+	private String rabbitUserName;
+
+	@Value("${spring.rabbitmq.password:guest}")
+	private String rabbitPassword;
 	
 	
 	@Bean
@@ -38,6 +45,8 @@ public class PublisherConfiguration {
 		CachingConnectionFactory factory=new CachingConnectionFactory();
 		factory.setHost(rabbitMQHost);
 		factory.setPort(rabbitMQPort);
+		factory.setUsername(rabbitUserName);
+		factory.setPassword(rabbitPassword);
 		return factory;
 	}
 	
